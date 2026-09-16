@@ -1,10 +1,29 @@
 # 🗺️ TripCraft — AI-Powered Travel Planner
 
-A full-stack travel planning web app where AI crafts your perfect trip itinerary, compares hotels and transport, and redirects to real booking platforms.
+TripCraft is a full-stack travel planning web application where AI helps
+users create personalized trip itineraries, compare hotels and transport
+options, and redirect to external booking platforms.
+
+This repository is also used for the **DevOps Practices and Principles
+(CSUL511)** course project.
 
 ---
 
-## 🏗️ Tech Stack
+## 👨‍🎓 Student Details
+
+| Field | Details |
+|---|---|
+| Name | Arman |
+| Roll Number | 24ESKCS056 |
+| Course | B.Tech – Computer Science & Engineering |
+| Semester | V |
+| Subject | DevOps Practices and Principles (CSUL511) |
+| Institution | Swami Keshvanand Institute of Technology, Management & Gramothan (SKIT), Jaipur |
+| Session | 2026 |
+
+---
+
+## 🏗️ Application Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -12,128 +31,14 @@ A full-stack travel planning web app where AI crafts your perfect trip itinerary
 | Backend | Node.js + Express.js |
 | Database | MongoDB + Mongoose |
 | AI | OpenAI GPT-4o |
-| Auth | JWT + bcryptjs |
+| Authentication | JWT + bcryptjs |
 
 ---
 
-## 🚀 Quick Setup
+## 🚀 Local Setup
 
-### 1. Clone & Install
+### 1. Clone the Repository
 
 ```bash
-# Install server dependencies
-cd server
-npm install
-
-# Install client dependencies
-cd ../client
-npm install
-```
-
-### 2. Configure Environment
-
-```bash
-# In the server/ folder, create .env
-cp .env.example .env
-```
-
-Edit `server/.env`:
-```
-PORT=5000
-MONGO_URI=mongodb+srv://YOUR_USER:YOUR_PASS@cluster0.mongodb.net/tripcraft
-JWT_SECRET=your_super_secret_key_here
-OPENAI_API_KEY=sk-your-openai-key-here
-```
-
-### 3. Get Required API Keys
-
-**MongoDB Atlas (Free):**
-1. Go to https://www.mongodb.com/atlas
-2. Create free cluster
-3. Get connection string → paste in MONGO_URI
-
-**OpenAI API Key:**
-1. Go to https://platform.openai.com/api-keys
-2. Create new key → paste in OPENAI_API_KEY
-
-### 4. Run the App
-
-```bash
-# Terminal 1 - Start backend
-cd server
-npm run dev
-
-# Terminal 2 - Start frontend
-cd client
-npm run dev
-```
-
-Open http://localhost:5173
-
----
-
-## 📦 Project Structure
-
-```
-tripcraft/
-├── server/                  # Node.js + Express backend
-│   ├── config/db.js         # MongoDB connection
-│   ├── controllers/         # Route handlers
-│   ├── models/              # Mongoose schemas
-│   ├── routes/              # API routes
-│   ├── middleware/          # Auth middleware
-│   ├── services/aiService.js # OpenAI integration
-│   └── server.js            # Entry point
-│
-└── client/                  # React frontend
-    └── src/
-        ├── pages/           # Home, PlanTrip, TripResult, MyTrips, Auth
-        ├── components/      # Navbar, Result tabs
-        ├── context/         # AuthContext
-        ├── services/api.js  # Axios API calls
-        └── utils/           # Booking redirect URLs
-```
-
----
-
-## 🔗 Booking Integrations
-
-| Transport | Platform | Redirect |
-|---|---|---|
-| 🚌 Bus | RedBus | redbus.in |
-| 🚂 Train | RailYatri | railyatri.in |
-| ✈️ Flight | MakeMyTrip | makemytrip.com/flights |
-| 🏨 Hotels | MakeMyTrip | makemytrip.com/hotels |
-| 🚖 Cab | Ola Cabs | olacabs.com |
-
----
-
-## 🌐 API Endpoints
-
-| Method | Route | Auth | Description |
-|---|---|---|---|
-| POST | /api/auth/register | ❌ | Create account |
-| POST | /api/auth/login | ❌ | Login |
-| GET | /api/auth/me | ✅ | Get profile |
-| POST | /api/trip/generate | Optional | AI trip generation |
-| GET | /api/trip/my-trips | ✅ | Saved trips |
-| GET | /api/trip/:id | ❌ | Get trip by ID |
-| DELETE | /api/trip/:id | ✅ | Delete trip |
-
----
-
-## 🎨 Design
-
-- **Theme**: Luxury editorial — midnight navy + gold accents
-- **Fonts**: Playfair Display + DM Sans
-- **UI**: Glassmorphism cards, animated gradients, parallax orbs
-- **Mobile**: Fully responsive
-
----
-
-## 📝 Notes
-
-- Users can generate trips without an account (guest mode)
-- Login required to save trips to My Trips
-- All booking buttons open in new tab (redirect-based, no payment processing)
-- AI generates realistic hotel names, train names, and landmarks for the actual destination
+git clone https://github.com/skit-devops-2026/DevOps-24ESKCS056.git
+cd DevOps-24ESKCS056
