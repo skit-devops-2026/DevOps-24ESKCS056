@@ -1,10 +1,31 @@
 const OpenAI = require('openai');
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
 
-const generateTripPlan = async ({ source, destination, budget, numberOfDays, numberOfPeople, preferences }) => {
+const generateTripPlan = async ({
+  source,
+  destination,
+  budget,
+  numberOfDays,
+  numberOfPeople,
+  preferences
+}) => {
+  // AI generation requires an OpenAI API key.
+  // Keeping this check here allows health/unit tests to run
+  // without requiring a real OpenAI key.
+  if (!openai) {
+    throw new Error('OPENAI_API_KEY is not configured');
+  }
+
   const budgetPerPerson = Math.round(budget / numberOfPeople);
-  const budgetCategory = budget < 10000 ? 'budget' : budget < 30000 ? 'mid-range' : 'luxury';
+  const budgetCategory =
+    budget < 10000
+      ? 'budget'
+      : budget < 30000
+        ? 'mid-range'
+        : 'luxury';
 
   const prompt = `You are an expert Indian travel planner. Generate a detailed, realistic trip plan in JSON format.
 
@@ -116,16 +137,18 @@ Rules:
 
   const content = response.choices[0].message.content.trim();
   const cleaned = content.replace(/```json|```/g, '').trim();
-  
+
   try {
     const plan = JSON.parse(cleaned);
     return plan;
   } catch (e) {
     // Try to extract JSON from response
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+
     if (jsonMatch) {
       return JSON.parse(jsonMatch[0]);
     }
+
     throw new Error('Failed to parse AI response as JSON');
   }
 };
