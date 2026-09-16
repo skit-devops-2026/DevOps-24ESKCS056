@@ -17,14 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/trip', require('./routes/tripRoutes'));
 
-// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    message: 'TripCraft API running 🚀'
+    message: 'TripCraft API running 🚀',
+    uptime: process.uptime()
   });
 });
-
 // Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
