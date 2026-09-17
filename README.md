@@ -42,3 +42,14 @@ This repository is also used for the **DevOps Practices and Principles
 ```bash
 git clone https://github.com/skit-devops-2026/DevOps-24ESKCS056.git
 cd DevOps-24ESKCS056
+
+### Monitoring
+
+The backend exposes real Prometheus metrics at `http://localhost:5000/metrics`.
+The local scrape configuration is in `monitoring/prometheus.yml`, and the
+Grafana dashboard definition is in `monitoring/grafana-dashboard.json`.
+The current target uses `host.docker.internal:5000` for local Docker-based
+Prometheus validation; it is not a public production monitoring endpoint.
+
+Metrics include HTTP request totals and duration histograms, plus default Node.js
+process metrics such as memory, CPU time, and uptime.
