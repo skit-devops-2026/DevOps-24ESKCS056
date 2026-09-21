@@ -1,7 +1,25 @@
 node_modules/
+**/node_modules/
 .env
 .env.*
+*.local
 dist/
+**/dist/
 build/
-.DS_Store
+**/build/
+coverage/
+**/coverage/
+.venv/
+venv/
+logs/
 *.log
+npm-debug.log*
+.DS_Store
+**/.DS_Store
+
+# Vite / React build cache
+.vite/
+
+# Editor/editor-specific
+.idea/
+.vscode/

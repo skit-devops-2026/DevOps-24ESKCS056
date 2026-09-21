@@ -1,7 +1,10 @@
 const OpenAI = require('openai');
 
-const openai = process.env.OPENAI_API_KEY
-  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const groq = process.env.GROQ_API_KEY
+  ? new OpenAI({
+      apiKey: process.env.GROQ_API_KEY,
+      baseURL: 'https://api.groq.com/openai/v1',
+    })
   : null;
 
 const generateTripPlan = async ({
@@ -12,11 +15,11 @@ const generateTripPlan = async ({
   numberOfPeople,
   preferences
 }) => {
-  // AI generation requires an OpenAI API key.
+  // AI generation requires a Groq API key.
   // Keeping this check here allows health/unit tests to run
-  // without requiring a real OpenAI key.
-  if (!openai) {
-    throw new Error('OPENAI_API_KEY is not configured');
+  // without requiring a real Groq key.
+  if (!groq) {
+    throw new Error('GROQ_API_KEY is not configured');
   }
 
   const budgetPerPerson = Math.round(budget / numberOfPeople);
@@ -128,8 +131,8 @@ Rules:
 - Use REAL hotel names, train names, and landmarks for ${destination}
 - bookingUrl for hotels should always be: https://www.makemytrip.com/hotels/hotel-listing/?city=${encodeURIComponent(destination)}`;
 
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o',
+  const response = await groq.chat.completions.create({
+    model: process.env.GROQ_MODEL || 'openai/gpt-oss-120b',
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.7,
     max_tokens: 4000,
